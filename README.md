@@ -1,4 +1,6 @@
-# New Project
+# WASM GIF Generator
+
+A GIF Generator app, based on [Fireship's tutorial](https://www.youtube.com/watch?v=-OTc0Ki7Sv0).
 
 > ✨ Bootstrapped with Create Snowpack App (CSA).
 
