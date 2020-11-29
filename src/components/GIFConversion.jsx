@@ -8,7 +8,8 @@ const GIFConversion = () => {
     const [ready, setReady] = useState(false);
     const [video, setVideo] = useState();
     const [gif, setGif] = useState();
-    const [time, setTime] = useState();
+    const [time, setTime] = useState(0);
+    const [startingSeconds, setStartingSeconds] = useState(0);
   
     const load = async () => {
       await ffmpeg.load();
@@ -17,6 +18,10 @@ const GIFConversion = () => {
 
     const handleSlideChange = (e) => {
         setTime(e.target.value)
+    }
+
+    const handleStartChange = (e) => {
+        setStartingSeconds(e.target.value)
     }
   
     useEffect(() => {
@@ -28,7 +33,7 @@ const GIFConversion = () => {
       ffmpeg.FS('writeFile', 'test.mp4', await fetchFile(video));
   
       // Run the FFMpeg command
-      await ffmpeg.run('-i', 'test.mp4', '-t', time, '-ss', '2.0', '-f', 'gif', 'out.gif');
+      await ffmpeg.run('-i', 'test.mp4', '-t', time, '-ss', startingSeconds, '-f', 'gif', 'out.gif');
   
       // Read the result
       const data = ffmpeg.FS('readFile', 'out.gif');
@@ -49,13 +54,35 @@ const GIFConversion = () => {
             <input aria-label="video file select" type="file" onChange={(e) => setVideo(e.target.files?.item(0))} />
         </div>
         <div className="convertor-controls">
-            {time}
-            <input aria-label="time-slider" type="range" className="convertor-controls-slider" min={0} max={10} onChange={handleSlideChange} />
+            <span><label htmlFor="starting-slider">Start: </label>{startingSeconds + ' secs'}</span>
+            <input 
+                aria-label="time-slider" 
+                id="starting-slider"
+                type="range" 
+                className="convertor-controls-slider" 
+                min={0} 
+                max={10}
+                step={0.1}
+                value={startingSeconds}
+                onChange={handleStartChange} 
+            />
+            <span><label htmlFor="time-slider">Time: </label>{time + ' secs'}</span>
+            <input 
+                aria-label="time-slider" 
+                id="time-slider"
+                type="range" 
+                className="convertor-controls-slider" 
+                min={0} 
+                max={10}
+                step={0.1}
+                value={time}
+                onChange={handleSlideChange} 
+            />
             <button className="convertor-controls-btn" onClick={convertToGif}>Convert</button>
         </div>
         <div className="convertor-gif">
             <h3>Result</h3>
-            {gif && <img src={gif} alt="" width="250" />}
+            {gif ? gif && <img src={gif} alt="" width="250" /> : <div className="convertor-gif-empty">Here be GIF...</div>}
         </div>
       </div>
     ) : (<p>Loading...</p>);
