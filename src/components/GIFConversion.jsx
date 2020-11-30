@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from 'react';
+import { Slider } from './Inputs';
 import './GIFConversion.scss';
 
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
@@ -54,29 +55,23 @@ const GIFConversion = () => {
             <input aria-label="video file select" type="file" onChange={(e) => setVideo(e.target.files?.item(0))} />
         </div>
         <div className="convertor-controls">
-            <span><label htmlFor="starting-slider">Start: </label>{startingSeconds + ' secs'}</span>
-            <input 
-                aria-label="time-slider" 
+            <Slider 
+                aria="starting-slider"
+                className="convertor-controls-slider" 
                 id="starting-slider"
-                type="range" 
-                className="convertor-controls-slider" 
-                min={0} 
+                label="Start"
                 max={10}
-                step={0.1}
-                value={startingSeconds}
                 onChange={handleStartChange} 
+                value={startingSeconds}
             />
-            <span><label htmlFor="time-slider">Time: </label>{time + ' secs'}</span>
-            <input 
-                aria-label="time-slider" 
-                id="time-slider"
-                type="range" 
+            <Slider 
+                aria="time-slider"
                 className="convertor-controls-slider" 
-                min={0} 
+                id="time-slider"
+                label="Time"
                 max={10}
-                step={0.1}
-                value={time}
                 onChange={handleSlideChange} 
+                value={time}
             />
             <button className="convertor-controls-btn" onClick={convertToGif}>Convert</button>
         </div>
