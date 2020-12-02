@@ -73,9 +73,12 @@
         background: #fff;
 
         &-empty {
-            background-color: gray;
-            height: 10rem;
-            width: 100%;
+            background-color: #ccc;
+            height: 12rem;
+            width: 12rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 
@@ -89,9 +92,38 @@
         background: #fff;
 
         &-empty {
-            background-color: gray;
+            background-color: #ccc;
             height: 10rem;
             width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }
+
+.custom-file-input::-webkit-file-upload-button {
+    margin-top: 1rem;
+    visibility: hidden;
+  }
+  .custom-file-input::before {
+    content: 'Select a file';
+    display: inline-block;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 400;
+    font-size: 10pt;
+    padding: 5px 5px;
+  }
+  .custom-file-input:hover::before {
+    border-color: black;
+  }
+  .custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }

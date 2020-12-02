@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { Slider } from './Inputs';
+import { SimpleShareButtons } from "react-simple-share";
 import './GIFConversion.scss';
 
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
@@ -10,7 +11,7 @@ const GIFConversion = () => {
     const [video, setVideo] = useState();
     const [gif, setGif] = useState();
     const [time, setTime] = useState(0);
-    const [startingSeconds, setStartingSeconds] = useState(0);
+    const [startingSeconds, setStartingSeconds] = useState(0.1);
   
     const load = async () => {
       await ffmpeg.load();
@@ -52,7 +53,7 @@ const GIFConversion = () => {
             width="250"
             src={URL.createObjectURL(video)}>
             </video> : <div className="convertor-video-empty">Select a video file</div>}
-            <input aria-label="video file select" type="file" onChange={(e) => setVideo(e.target.files?.item(0))} />
+            <input aria-label="video file select" className="custom-file-input" type="file" onChange={(e) => setVideo(e.target.files?.item(0))} />
         </div>
         <div className="convertor-controls">
             <Slider 
@@ -76,8 +77,21 @@ const GIFConversion = () => {
             <button className="convertor-controls-btn" onClick={convertToGif}>Convert</button>
         </div>
         <div className="convertor-gif">
-            <h3>Result</h3>
-            {gif ? gif && <img src={gif} alt="" width="250" /> : <div className="convertor-gif-empty">Here be GIF...</div>}
+            {gif ? gif && (
+                <>
+                    <img src={gif} alt="" width="250" />
+                    <SimpleShareButtons 
+                        url={gif}
+                        whitelist={
+                            ["Facebook", "Twitter", "Reddit"]
+                        }
+                        size="40px"
+                        via="WASM"
+                    />
+                </>
+            ) : (
+                <div className="convertor-gif-empty">Here be GIF...</div>
+            )}
         </div>
       </div>
     ) : (<p>Loading...</p>);
