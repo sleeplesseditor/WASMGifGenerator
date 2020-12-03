@@ -25,6 +25,12 @@ const GIFConversion = () => {
     const handleStartChange = (e) => {
         setStartingSeconds(e.target.value)
     }
+
+    const clearSetup = () => {
+        setStartingSeconds(0.1);
+        setTime(0);
+        setVideo(null);
+    }
   
     useEffect(() => {
       load();
@@ -74,7 +80,8 @@ const GIFConversion = () => {
                 onChange={handleSlideChange} 
                 value={time}
             />
-            <button className="convertor-controls-btn" onClick={convertToGif}>Convert</button>
+            <button className="convertor-controls-btn-create" onClick={convertToGif}>Convert</button>
+            <button className="convertor-controls-btn-clear" onClick={clearSetup}>Clear Selection</button>
         </div>
         <div className="convertor-gif">
             {gif ? gif && (
@@ -82,9 +89,7 @@ const GIFConversion = () => {
                     <img src={gif} alt="" width="250" />
                     <SimpleShareButtons 
                         url={gif}
-                        whitelist={
-                            ["Facebook", "Twitter", "Reddit"]
-                        }
+                        whitelist={["Facebook", "Twitter", "Reddit"]}
                         size="40px"
                         via="WASM"
                     />
