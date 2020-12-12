@@ -1,7 +1,8 @@
 import React from 'react';
+import './Inputs.scss';
 
 const Slider = ({
-    aria, className, id, label, max, onChange, value
+    aria, className, id, label, max, min, onChange, value
 }) => {
     return (
         <>
@@ -11,7 +12,7 @@ const Slider = ({
                 id={id}
                 type="range" 
                 className={className}
-                min={0} 
+                min={min} 
                 max={max}
                 step={0.1}
                 value={value}

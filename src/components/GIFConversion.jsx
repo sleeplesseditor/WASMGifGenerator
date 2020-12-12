@@ -11,7 +11,7 @@ const GIFConversion = () => {
     const [video, setVideo] = useState();
     const [gif, setGif] = useState();
     const [time, setTime] = useState(0);
-    const [startingSeconds, setStartingSeconds] = useState(0.1);
+    const [startingSeconds, setStartingSeconds] = useState(0);
   
     const load = async () => {
       await ffmpeg.load();
@@ -23,11 +23,12 @@ const GIFConversion = () => {
     }
 
     const handleStartChange = (e) => {
+        console.log('E', e.target.value)
         setStartingSeconds(e.target.value)
     }
 
     const clearSetup = () => {
-        setStartingSeconds(0.1);
+        setStartingSeconds(0);
         setTime(0);
         setVideo(null);
     }
@@ -68,6 +69,7 @@ const GIFConversion = () => {
                 id="starting-slider"
                 label="Start"
                 max={10}
+                min={0.1}
                 onChange={handleStartChange} 
                 value={startingSeconds}
             />
@@ -76,12 +78,15 @@ const GIFConversion = () => {
                 className="convertor-controls-slider" 
                 id="time-slider"
                 label="Time"
-                max={10}
+                max={30}
+                min={0}
                 onChange={handleSlideChange} 
                 value={time}
             />
-            <button className="convertor-controls-btn-create" onClick={convertToGif}>Convert</button>
-            <button className="convertor-controls-btn-clear" onClick={clearSetup}>Clear Selection</button>
+            <div className="convertor-controls-btns">
+                <button className="convertor-controls-btn-create" onClick={convertToGif} disabled={time === 0}>Convert</button>
+                <button className="convertor-controls-btn-clear" onClick={clearSetup}>Clear Selection</button>
+            </div>
         </div>
         <div className="convertor-gif">
             {gif ? gif && (
