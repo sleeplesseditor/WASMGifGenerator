@@ -23,7 +23,6 @@ const GIFConversion = () => {
     }
 
     const handleStartChange = (e) => {
-        console.log('E', e.target.value)
         setStartingSeconds(e.target.value)
     }
 
@@ -54,7 +53,10 @@ const GIFConversion = () => {
   
     return ready ? (
       <div className="convertor-container">
-        <div className="convertor-video">
+        <div className="convertor-video card">
+            <div className="card-header">
+                <h3>Video Input</h3>
+            </div>
             {video ? video && <video
             controls
             width="250"
@@ -62,7 +64,10 @@ const GIFConversion = () => {
             </video> : <div className="convertor-video-empty">Select a video file</div>}
             <input aria-label="video file select" className="custom-file-input" type="file" onChange={(e) => setVideo(e.target.files?.item(0))} />
         </div>
-        <div className="convertor-controls">
+        <div className="convertor-controls card">        
+            <div className="card-header">
+                <h3>Settings</h3>
+            </div>
             <Slider 
                 aria="starting-slider"
                 className="convertor-controls-slider" 
@@ -84,11 +89,14 @@ const GIFConversion = () => {
                 value={time}
             />
             <div className="convertor-controls-btns">
-                <button className="convertor-controls-btn-create" onClick={convertToGif} disabled={time <= 0.05}>Convert</button>
+                <button className="convertor-controls-btn-create" onClick={convertToGif} disabled={time <= 0.05 && startingSeconds <= 0.01}>Convert</button>
                 <button className="convertor-controls-btn-clear" onClick={clearSetup}>Clear Selection</button>
             </div>
         </div>
-        <div className="convertor-gif">
+        <div className="convertor-gif card">
+            <div className="card-header">
+                <h3>GIFs</h3>
+            </div>
             {gif ? gif && (
                 <>
                     <img src={gif} alt="" width="250" />

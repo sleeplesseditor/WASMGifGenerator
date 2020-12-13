@@ -1,18 +1,13 @@
 .convertor {
     &-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        margin-top: 5rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 5rem;
+        grid-auto-rows: minmax(100px, auto);
+        margin: 5rem;
     }
 
     &-controls {
-        border: 1px solid black;
-        padding: 2rem 5rem;
-        display: flex;
-        flex-direction: column;
-        background: #fff;
-
         input {
             margin-bottom: 1rem;
         }
@@ -60,10 +55,14 @@
                 margin: 0rem 0.5rem;
 
                 &:disabled {
-                  background-color: grey;
+                  background-color: #797979;
+                  color:#ffffff;
 
                   &:hover {
-                    background-color: black;
+                    background-color: #797979;
+                    &:before {
+                      transform: translateX(-100%) rotate(45deg);
+                    }
                   }
                 }
 
@@ -99,14 +98,6 @@
     }
 
     &-gif {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid black;
-        padding: 2rem;
-        background: #fff;
-
         &-empty {
             background-color: #ccc;
             height: 12rem;
@@ -118,14 +109,6 @@
     }
 
     &-video {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid black;
-        padding: 2rem;
-        background: #fff;
-
         &-empty {
             background-color: #ccc;
             height: 10rem;
@@ -166,3 +149,16 @@
   .custom-file-input:active::before {
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
   }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2),
+  -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
+  border-radius: 40px;
+  padding: 4px 30px 20px;
+  min-height: 380px;
+}
