@@ -59,6 +59,14 @@
                 padding: 10px 20px;
                 margin: 0rem 0.5rem;
 
+                &:disabled {
+                  background-color: grey;
+
+                  &:hover {
+                    background-color: black;
+                  }
+                }
+
                 &:hover {
                     background-color: #01af18;
                     color:#ffffff;

@@ -84,7 +84,7 @@ const GIFConversion = () => {
                 value={time}
             />
             <div className="convertor-controls-btns">
-                <button className="convertor-controls-btn-create" onClick={convertToGif} disabled={time === 0}>Convert</button>
+                <button className="convertor-controls-btn-create" onClick={convertToGif} disabled={time <= 0.05}>Convert</button>
                 <button className="convertor-controls-btn-clear" onClick={clearSetup}>Clear Selection</button>
             </div>
         </div>
