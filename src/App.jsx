@@ -7,7 +7,7 @@ function App() {
   
   return (
     <div className="App">
-      <Header title="WASM GIF Convertor" />
+      <Header title="MP4 To GIF Convertor" />
       <GIFConversion />
     </div>
   );

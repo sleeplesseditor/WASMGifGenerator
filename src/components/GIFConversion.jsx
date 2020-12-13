@@ -40,7 +40,7 @@ const GIFConversion = () => {
       ffmpeg.FS('writeFile', 'test.mp4', await fetchFile(video));
   
       // Run the FFMpeg command
-      await ffmpeg.run('-i', 'test.mp4', '-t', time, '-ss', startingSeconds, '-f', 'gif', 'out.gif');
+      await ffmpeg.run('-i', 'test.mp4', '-pix_fmt', 'rgb24', '-r', '10', '-s', '320x240', '-t', time, '-ss', startingSeconds, '-f', 'gif', 'out.gif');
   
       // Read the result
       const data = ffmpeg.FS('readFile', 'out.gif');
