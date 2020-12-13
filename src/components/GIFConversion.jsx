@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react';
 import { Slider } from './Inputs';
-import { SimpleShareButtons } from "react-simple-share";
 import './GIFConversion.scss';
 
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
@@ -99,13 +98,8 @@ const GIFConversion = () => {
             </div>
             {gif ? gif && (
                 <>
-                    <img src={gif} alt="" width="250" />
-                    <SimpleShareButtons 
-                        url={gif}
-                        whitelist={["Facebook", "Twitter", "Reddit"]}
-                        size="40px"
-                        via="WASM"
-                    />
+                    <img className="convertor-gif-output" src={gif} alt="" width="250" />
+                    <a className="convertor-controls-btn-download" href={gif} download>Click to Download</a>
                 </>
             ) : (
                 <div className="convertor-gif-empty">Here be GIF...</div>
